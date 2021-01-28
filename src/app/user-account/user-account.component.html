@@ -1,0 +1,28 @@
+<html>
+<div class="col-md-6">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>name</th>
+              <th>designation</th>
+              <th>salary</th>
+              </tr>
+            </thead>
+        <tbody>
+     <tr *ngFor="let user of usersUAC">
+        <td>{{user.userId}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.lastname}}</td>
+        <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete Employee</button></td>
+    </tr>
+</tbody>
+</table>-
+<form>
+    <button  class="btn btn-danger" (click)="test()"> de</button>
+ 
+   
+</form>
+
+
+</div>
+</html>

@@ -1,0 +1,19 @@
+<div class="container">
+    <div>
+      Nick name : <input type="text" name="nickname" [(ngModel)]="nickname">
+      Passwordd : <input type="text" name="passwordd" [(ngModel)]="passwordd">-
+    </div>
+
+    <button  (click)=checkLogin()   class="btn btn-success">
+      Login
+    </button>
+    <td>{{findUserObj.name}}</td>
+    <button  (click)=fastLog()   class="btn btn-success">
+      fast login (for tests)
+    </button>
+
+  </div>
+
+  <div style="background-color:grey;"></div>
+ <!--class="col s8" class="col s2 disabled" do tego nizej-->
+

@@ -1,0 +1,38 @@
+<div class="container">
+  <!--  <input style='width:20em'
+   
+      type="text"
+      placeholder="Dodaj zadanie i datę wykonania"
+      (keyup)="0"
+      #nameInput
+       nameInput.value = '';
+    />-->
+   <!-- <input style='width:23em'  type="datetime-local"  (change)="0" #dateInput />
+    <td>{{dateInput.value}}</td>
+    <button style ="background-color: green;"
+     (click)="
+        createTask(dateInput.value);
+          dateInput.value = ''
+      "
+      [disabled]="dateInput.value === '' "
+    >
+      +
+    </button>
+    <td>{{date}}</td>-->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Terms</th>
+      
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let availableTerms of availableTermsFromServer">
+              <td>{{availableTerms}}</td>
+              <td><button class="btn btn-danger" onClick="refreshPage()" (click)="addVisit(availableTerms)"> Add visit</button></td>
+          </tr>
+      </tbody>
+        </table>
+  
+  </div>
+  

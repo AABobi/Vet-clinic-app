@@ -1,0 +1,75 @@
+<html>
+  <head></head>
+  <body style="background-color: gray;">
+  <div class="col-md-6">
+     <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>lastName</th>
+        </tr>
+      </thead>
+      <tbody>
+         <!-- <tr *ngFor="let user of users">
+              <td>{{user.id}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.lastName}}</td>
+              <td><button class="btn btn-danger" (click)="deleteEmployee(user)"> Delete Employee</button></td>
+              </tr>-->
+              <td>{{user2.userId}}</td>
+              <td>{{user2.name}}</td>
+              <td>{{user2.lastname}}</td>
+              <td></td>
+          </tbody>
+    </table>
+      <!--<form>
+        
+        <div class="form-group">
+          <label  style="color: black;" for="name">Name:</label>
+          <input style="background-color:grey ;" type="name" [(ngModel)]="users.name" placeholder="Name" name="name" class="form-control" id="name">
+        </div>
+        <td>{{ getName().a }}</td>
+      </form>-->
+      
+      <!--<h2 class="text-center">Add Employee</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="name" [(ngModel)]="user.name" placeholder="Name" name="name" class="form-control" id="name">
+        </div>
+      
+        <div class="form-group">
+          <label for="lastname">Last name:</label>
+          <input [(ngModel)]="user.lastname" placeholder="LastName" name="lastname" class="form-control" id="lastname">
+        </div>
+      <button class="btn btn-success" (click)="createUser()">Create</button>
+      
+      </form>-->
+  
+      <h2 class="text-center">Add Employee</h2>
+      
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="name" [(ngModel)]="loginPass.name" placeholder="Name" name="name" class="form-control" id="name">
+        </div>
+      
+        <div class="form-group">
+          <label for="lastname">Last name:</label>
+          <input [(ngModel)]="loginPass.lastname" placeholder="LastName" name="lastname" class="form-control" id="lastname">
+        </div>
+       
+      <!--<li><a  routerLink="/users" class="nav-link">View Employees</a>routerLink="/users"</li>-->
+       
+      <button class="btn btn-success"   >Login</button>
+
+      <td>{{loginPass.name}}</td>
+     <td>{{loginPass.lastname}}</td> 
+     <td>{{findUserObj.name}}</td> 
+    <td>{{test.name}}</td>
+    <td>{{test.lastname}}</td>
+
+   
+      </div>
+  </body>
+</html>
