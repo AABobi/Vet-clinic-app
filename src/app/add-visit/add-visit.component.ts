@@ -6,9 +6,9 @@ import { DateOfTheVisit, HttpClientService, Passwords, User } from '../services/
   styleUrls: ['./add-visit.component.css']
 })
 export class AddVisitComponent implements OnInit {
-  user: User = new User('', '', '', '', null, null);
+  user: User = new User('', '', '', '','', null, null);
   dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit('');
-  test2: User = new User('', '', '', '', null, null);
+  test2: User = new User('', '', '', '','', null, null);
   // tslint:disable-next-line:ban-types
   date: String = '';
   // tslint:disable-next-line:ban-types

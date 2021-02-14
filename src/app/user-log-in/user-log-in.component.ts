@@ -1,5 +1,11 @@
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { HttpClientService, User} from '../services/http-client.service';
+
+
+
 
 @Component({
   selector: 'app-user-log-in',
@@ -7,44 +13,22 @@ import { HttpClientService, User} from '../services/http-client.service';
   styleUrls: ['./user-log-in.component.css']
 })
 export class UserLogInComponent implements OnInit {
-  /*users: User[] = [
-    {
-      logInUser();
-    }
-  ];*/
-constructor(
-  private httpClientService: HttpClientService
-) { }
-  namee: string;
-  pathFalse = "/";
-  pathTrue = "/users";
-  path: string;
-user: User = new User('','', '', '',null, null);
-loginPass: User = new User('','', '', '',null, null);
-user2: User = new User('','', '', '',null, null);
-findUserObj: User = new User('','','','',null, null);
-test: User = new User('','','','',null, null);
-test2: User = new User('1','a','b','',null, null);
-//ngOnInit(){}
+ private routeSub: Subscription;
+constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClientService) { }
 
-  // tslint:disable-next-line: typedef
-  ngOnInit() {
-    //this.httpClientService.userLogIn().subscribe(
-  //    responseEmployees => {this.user2 = responseEmployees; }
-  //  );
+userId: number;
+
+  // tslint:disable-next-line:typedef
+  ngOnInit(): void {
+  //  const id = this.route.snapshot.paramMap.get('id');
+    this.userId = +this.route.snapshot.paramMap.get('id');
+}
+  // tslint:disable-next-line:typedef
+  confirmUser(){
+   this.httpClient.confirmUser(this.userId).subscribe();
+   alert("You confrim account successfully")  
+   this.router.navigate(['LoginComponent']);
   }
-
-
-  
-
-
-  /*gett(): void{
-    this.httpClientService.userLogIn().subscribe(
-      responseUser => {
-        this.users = responseUser;
-        alert('Test');
-      }
-    );*/
-  }
+}
 
 

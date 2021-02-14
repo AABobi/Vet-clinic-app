@@ -12,9 +12,10 @@ export class RegisterComponent implements OnInit {
   nickname = '';
   username = '';
   userlastname = '';
+  email = '';
   passwordd = '';
   passwords: Passwords = new Passwords('');
-  regPass: User = new User('','', '', '', null, null);
+  regPass: User = new User('', '', '', '', '', null, null);
   constructor(private router: Router,
               private loginservice: AuthenticationService,
               private httpClient: HttpClientService) { }
@@ -27,20 +28,26 @@ export class RegisterComponent implements OnInit {
     this.regPass.nickname = this.nickname;
     this.regPass.name = this.username;
     this.regPass.lastname = this.userlastname;
+    this.regPass.email = this.email;
     this.passwords.password = this.passwordd;
     this.regPass.passwords = this.passwords;
     this.httpClient.createUser(this.regPass).subscribe(data =>{
-    if(data.nickname === 'exist'){
+    if (data.nickname === 'nickname'){
      this.router.navigate(['RegisterComponent']);
+     window.location.reload();
      alert('uncorrent nickname');
-     this.nickname = '';
+     /*this.nickname = '';
      this.username = '';
      this.userlastname = '';
-     this.passwordd = '';
+     this.passwordd = '';*/
+    }else if(data.nickname === 'email'){
+      this.router.navigate(['RegisterComponent']);
+      window.location.reload();
+      alert('An account with this email exists ');
     }else{
       alert(data.nickname);
-      this.router.navigate(['UserAccountComponent']);
-      sessionStorage.setItem('username', data.name);
+      this.router.navigate(['LoginComponent']);
+      //sessionStorage.setItem('username', data.name);
     }
     });
   }

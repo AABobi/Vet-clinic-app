@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   userlastname = '';
   passwordd = '';
   invalidLogin = true;
-  loginPass: User = new User('','', '', '', null, null);
-  findUserObj: User = new User('','', '', '', null, null);
+  loginPass: User = new User('','', '', '','', null, null);
+  findUserObj: User = new User('', '', '', '','', null, null);
   // findUserObj2: User = new User('', '', '', null);
   passwords: Passwords = new Passwords('');
 
@@ -46,19 +46,25 @@ fastLog(){
   // alert(this.loginPass.name);
   this.passwords.password = this.passwordd;
   this.loginPass.passwords = this.passwords;
-
   this.httpClient.userLogIn(this.loginPass).subscribe(data => {
     this.findUserObj = data;
-    if (this.findUserObj.name === 'false'){
- alert('false');
- this.invalidLogin = true;
-    }
- else{
- 
-  sessionStorage.setItem('username', this.nickname);
-  alert(sessionStorage.getItem('username'));
-  this.router.navigate(['UserAccountComponent']);
-  this.invalidLogin = false;
+    if (this.findUserObj.name === 'false' || this.findUserObj.name === 'NC'){
+    alert(this.findUserObj.name);
+    this.invalidLogin = true;
+    window.location.reload();
+  }else{
+   if(data.passwords.confirmed === 2){
+    sessionStorage.setItem('username', 'admin');
+    alert(sessionStorage.getItem('username'));
+    this.router.navigate(['UserAccountComponent']);
+    this.invalidLogin = false;
+   }else{
+    sessionStorage.setItem('username', this.nickname);
+    alert(sessionStorage.getItem('username'));
+    this.router.navigate(['UserAccountComponent']);
+    this.invalidLogin = false;
+   }
+  
  // alert(this.findUserObj.name);
  }
 });

@@ -33,6 +33,14 @@ if (username === 'j' && password === 'pas') {
     console.log(!(user === null));
     return !(user === null);
   }
+
+  // tslint:disable-next-line: typedef
+  adminAccess() {
+    const user = sessionStorage.getItem('username');
+    console.log(!(user === null));
+    return !(user === null);
+  }
+
   // tslint:disable-next-line: typedef
    logOut() {
     sessionStorage.removeItem('username');

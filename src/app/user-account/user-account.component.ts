@@ -9,7 +9,7 @@ import { HttpClientService, User } from '../services/http-client.service';
 })
 export class UserAccountComponent implements OnInit {
 usersUAC: User[];
-findUserObj: User = new User('','', '', '', null, null);
+findUserObj: User = new User('','', '', '','', null, null);
 id = '1';
   constructor(private httpClientService: HttpClientService
     ) { }
