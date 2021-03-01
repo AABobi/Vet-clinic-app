@@ -1,0 +1,2 @@
+localeStorage stores username!!
+sessionStoreg stores variables

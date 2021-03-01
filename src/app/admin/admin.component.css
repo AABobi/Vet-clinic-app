@@ -1,0 +1,73 @@
+
+.container {
+    width: 500px;
+    clear: both;
+  }
+  
+  .container input {
+    width: 100%;
+    clear: both;
+  }
+  .but {
+    height: 200px;
+    position: relative;
+    border: 3px solid green;
+  }
+  
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+.button{
+  color:white;
+  position: absolute;
+  top: 160px;
+  width:25%;
+  margin-left:-2%;
+  margin-right:35%;
+  background-color: #ce1111;
+}
+.find{
+  color:white;
+  width:25%;
+  margin-left:75%;
+  margin-right:35%;
+  background-color: #ce1111;
+}
+
+.find2{
+  color:white;
+  width:25%;
+  margin-left:75%;
+  margin-right:35%;
+  background-color: #f5a361;
+}
+
+.terms{
+  color:white;
+  position: absolute;
+  top: 205px;
+  width:25%;
+  margin-left:-2%;
+  margin-right:35%;
+  background-color: #ce1111;
+}
+
+.maa{
+  color:white;
+  width:35%;
+  margin-left:0%;
+  margin-right:55%;
+  background-color: #ce1111;
+}
+
+.showInf{
+  color:white;
+  width:35%;
+  margin-left:-60%;
+  margin-right:55%;
+  background-color: #ce1111;
+}

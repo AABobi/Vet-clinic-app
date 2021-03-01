@@ -22,9 +22,11 @@ userId: number;
   ngOnInit(): void {
   //  const id = this.route.snapshot.paramMap.get('id');
     this.userId = +this.route.snapshot.paramMap.get('id');
+    
 }
   // tslint:disable-next-line:typedef
   confirmUser(){
+   alert(this.userId);
    this.httpClient.confirmUser(this.userId).subscribe();
    alert("You confrim account successfully")  
    this.router.navigate(['LoginComponent']);

@@ -10,15 +10,16 @@ import { HttpClientService, Passwords, User } from '../services/http-client.serv
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  test = 'aaa';
   nickname ='';
   username = '';
   userlastname = '';
   passwordd = '';
   invalidLogin = true;
-  loginPass: User = new User('','', '', '','', null, null);
-  findUserObj: User = new User('', '', '', '','', null, null);
+  loginPass: User = new User(0,'', '', '','','' ,null);
+  findUserObj: User = new User(0, '', '', '','', '', null);
   // findUserObj2: User = new User('', '', '', null);
-  passwords: Passwords = new Passwords('');
+  passwords: Passwords = new Passwords(0,'');
 
 
   constructor(private router: Router,
@@ -34,9 +35,9 @@ export class LoginComponent implements OnInit {
 // tslint:disable-next-line:typedef
 fastLog(){
  // alert('true');
-  sessionStorage.setItem('username', 'test');
-  localStorage.setItem('userId','1');
-  this.router.navigate(['UserAccountComponent']);
+ sessionStorage.setItem('username', 'admin');
+ localStorage.setItem('username', 'admin')
+ this.router.navigate(['UserAccountComponent']);
 }
 
 
@@ -53,20 +54,14 @@ fastLog(){
     this.invalidLogin = true;
     window.location.reload();
   }else{
-   if(data.passwords.confirmed === 2){
+    alert("to");
     sessionStorage.setItem('username', 'admin');
-    alert(sessionStorage.getItem('username'));
-    this.router.navigate(['UserAccountComponent']);
-    this.invalidLogin = false;
-   }else{
-    sessionStorage.setItem('username', this.nickname);
-    alert(sessionStorage.getItem('username'));
+    localStorage.setItem('username', this.nickname)
     this.router.navigate(['UserAccountComponent']);
     this.invalidLogin = false;
    }
   
  // alert(this.findUserObj.name);
- }
 });
   }
 }

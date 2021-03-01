@@ -1,6 +1,31 @@
-
- <td *ngIf="!test()">ezz</td>
- <td *ngIf="test()">ezzz</td>
- 
-
+<div class="container">
+  
+  
+  <td><h3>Find user</h3></td>
+         Name : <input type="text" name="name" [(ngModel)]="name">
+    Last name : <input type="text" name="lastName" [(ngModel)]="lastName">
+    <button  class="btn find" (click)=findUserForAdmin()>FIND</button>
+    <button  class="btn find2" (click)=findAllUsersForAdmin()>FIND ALL</button>
+  </div>
+  <button class="btn terms" (click)="goToTerms(user)">Go to free terms</button>
+  <button class="btn button" (click)="goToTerms2(user)">Make an appointment for unregister user</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>nickname</th>
+      <th>name</th>
+      <th>lastName</th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr *ngFor="let user of usersArray">
+            <td>{{user.nickname}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.lastname}}</td>
+            <td><button class="btn maa" (click)="goToTerms(user)">Make an appointment </button></td>
+            <td><button class="btn showInf" (click)="goToTerms(user)">Show information </button></td>
+            </tr>
+            <td></td>
+        </tbody>
+  </table>
         

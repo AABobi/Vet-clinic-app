@@ -7,7 +7,7 @@ import { HttpClientService, Passwords, User } from '../services/http-client.serv
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-userPermissions: User = new User('', '', '', '', '', null, null);
+userPermissions: User = new User(0, '', '', '', '', '', null);
 
   constructor(public loginService: AuthenticationService,
               public httpClient: HttpClientService ) { }
@@ -18,11 +18,12 @@ this.httpClient.findUser(sessionStorage.getItem('username')).subscribe(data => {
  this.userPermissions = data;
 });
   }
-
+  //When server return String "admin" then this method return true and activates admin panel else - normal user view
+  // tslint:disable-next-line:typedef
   test(){
-    if(sessionStorage.getItem('username') === 'admin'){
-     return true;
-    }else{
+    if(localStorage.getItem('username') === 'admin'){
+      return true;
+     }else{ 
     return false;
     }
   }

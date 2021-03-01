@@ -14,8 +14,8 @@ export class RegisterComponent implements OnInit {
   userlastname = '';
   email = '';
   passwordd = '';
-  passwords: Passwords = new Passwords('');
-  regPass: User = new User('', '', '', '', '', null, null);
+  passwords: Passwords = new Passwords(0, '');
+  regPass: User = new User(0, '', '', '', '', '', null);
   constructor(private router: Router,
               private loginservice: AuthenticationService,
               private httpClient: HttpClientService) { }

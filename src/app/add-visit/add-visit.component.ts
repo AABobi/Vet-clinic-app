@@ -6,24 +6,36 @@ import { DateOfTheVisit, HttpClientService, Passwords, User } from '../services/
   styleUrls: ['./add-visit.component.css']
 })
 export class AddVisitComponent implements OnInit {
-  user: User = new User('', '', '', '','', null, null);
-  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit('');
-  test2: User = new User('', '', '', '','', null, null);
-  // tslint:disable-next-line:ban-types
-  date: String = '';
-  // tslint:disable-next-line:ban-types
-  dateArray: String[] = [];
+  user: User = new User(0, '', '', '', '', '', null);
+  comment: string;
+  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(0, '', null, null);
+  terms: string;
+  pageApperarance = true;
   constructor(private httpClient: HttpClientService) {}
   // tslint:disable-next-line:ban-types
   availableTermsFromServer: String[] = [];
   ngOnInit(): void {
-    //alert(sessionStorage.getItem('username'));
+    // alert(sessionStorage.getItem('username'));
     this.httpClient.getVisit().subscribe(
     data => {
     this.availableTermsFromServer = data;
-  });}
+  });
+}
 
+test(){
+  if(localStorage.getItem('username') === 'admin'){
+    return true;
+   }else{ 
+  return false;
+  }
+}
 
+// tslint:disable-next-line:typedef
+addVisiWithOut(){
+this.user.nickname = this.terms;
+alert(this.terms);
+this.httpClient.addTermsWithoutAccount(this.user).subscribe();
+}
 
     // tslint:disable-next-line:typedef
     /*createTask(name: string, deadline: string) {
@@ -38,10 +50,14 @@ export class AddVisitComponent implements OnInit {
     // tslint:disable-next-line:typedef
     addVisit(terms: string) {
      this.user.nickname = sessionStorage.getItem('username');
+     if (this.user.nickname === 'unregister'){
+     this.pageApperarance = false;
+     this.terms = terms;
+     }else{
      window.location.reload();
      this.dateOfTheVisit.dateof = terms;
-     this.user.dateOfTheVisit = this.dateOfTheVisit;
-     this.httpClient.addVisit(this.user).subscribe();
-
-    }
+     this.dateOfTheVisit.id = this.user.id;
+     this.httpClient.addVisit(this.dateOfTheVisit).subscribe();
+     }
+}
 }
