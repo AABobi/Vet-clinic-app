@@ -2,7 +2,7 @@ import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HttpClientService, User} from '../services/http-client.service';
+import { HttpClientService, Users} from '../services/http-client.service';
 
 
 

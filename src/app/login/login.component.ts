@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { HttpClientService, Passwords, User } from '../services/http-client.service';
+import { HttpClientService, Passwords, Users } from '../services/http-client.service';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   userlastname = '';
   passwordd = '';
   invalidLogin = true;
-  loginPass: User = new User(0,'', '', '','','' ,null);
-  findUserObj: User = new User(0, '', '', '','', '', null);
+  loginPass: Users = new Users(0,'', '', '','','' ,null);
+  findUserObj: Users = new Users(0, '', '', '','', '', null);
   // findUserObj2: User = new User('', '', '', null);
   passwords: Passwords = new Passwords(0,'');
 
@@ -41,6 +41,7 @@ fastLog(){
 }
 
 
+  
   // tslint:disable-next-line:typedef
   checkLogin() {
   this.loginPass.nickname = this.nickname;
@@ -54,7 +55,7 @@ fastLog(){
     this.invalidLogin = true;
     window.location.reload();
   }else{
-    alert("to");
+   
     sessionStorage.setItem('username', 'admin');
     localStorage.setItem('username', this.nickname)
     this.router.navigate(['UserAccountComponent']);

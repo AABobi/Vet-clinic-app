@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
-import { HttpClientService, User } from '../services/http-client.service';
+import { HttpClientService, Users } from '../services/http-client.service';
 
 @Component({
   selector: 'app-user-account',
@@ -8,8 +8,8 @@ import { HttpClientService, User } from '../services/http-client.service';
   styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit {
-usersUAC: User[];
-findUserObj: User = new User(0,'', '', '','','', null);
+usersUAC: Users[];
+findUserObj: Users = new Users(0,'', '', '','','', null);
 id = '1';
   constructor(private httpClientService: HttpClientService
     ) { }
@@ -54,7 +54,7 @@ id = '1';
     alert(localStorage.getItem('userId'));
   }
 
-  deleteUser(user: User): void {
+  deleteUser(user: Users): void {
     this.httpClientService.deleteUser(user)
       .subscribe( data => {
         this.usersUAC = this.usersUAC.filter(u => u !== user);

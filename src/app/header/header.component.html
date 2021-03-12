@@ -30,8 +30,8 @@
             <li><a  routerLink="/login" class="nav-link">Login</a></li>
             <li><a  routerLink="/logout" class="nav-link">LogOut</a></li>-->
             <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/UserAccountComponent" class="nav-link">User account</a></li>
-            <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">{{httpClient.tmp}}</a></li>
            <!-- <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">userlogin</a></li>-->
+           <li><a  *ngIf="loginService.isUserLoggedIn()" routerLink="/AddVisitComponent" class="nav-link">Add visit</a></li>
             <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/LoginComponent" class="nav-link">Login</a></li>
             <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/RegisterComponent" class="nav-link">New account</a></li>
             <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/LogoutComponent" class="nav-link">Logout</a></li>

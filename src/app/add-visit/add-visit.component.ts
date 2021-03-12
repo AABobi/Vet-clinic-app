@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DateOfTheVisit, HttpClientService, Passwords, User } from '../services/http-client.service';
+import { DateOfTheVisit, HttpClientService, Passwords, Users } from '../services/http-client.service';
 @Component({
   selector: 'app-add-visit',
   templateUrl: './add-visit.component.html',
   styleUrls: ['./add-visit.component.css']
 })
 export class AddVisitComponent implements OnInit {
-  user: User = new User(0, '', '', '', '', '', null);
+  user: Users = new Users(69, '', '', '', '', '', null);
   comment: string;
-  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(0, '', null, null);
+  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(69, '', this.user, null);
   terms: string;
   pageApperarance = true;
   constructor(private httpClient: HttpClientService) {}
@@ -49,15 +49,20 @@ this.httpClient.addTermsWithoutAccount(this.user).subscribe();
     }*/
     // tslint:disable-next-line:typedef
     addVisit(terms: string) {
-     this.user.nickname = sessionStorage.getItem('username');
+     this.user.nickname = localStorage.getItem('username');
+     //alert(this.user.nickname);
      if (this.user.nickname === 'unregister'){
      this.pageApperarance = false;
      this.terms = terms;
      }else{
+     // alert(localStorage.getItem('username'));
      window.location.reload();
+     // tslint:disable-next-line:no-unused-expression
      this.dateOfTheVisit.dateof = terms;
-     this.dateOfTheVisit.id = this.user.id;
+     // this.dateOfTheVisit.id = this.user.id;
+     this.dateOfTheVisit.users = this.user;
+    
      this.httpClient.addVisit(this.dateOfTheVisit).subscribe();
-     }
+     } 
 }
 }

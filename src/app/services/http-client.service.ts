@@ -5,7 +5,7 @@ import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { identifierModuleUrl } from '@angular/compiler';
 /* tslint:disable */
-export class User{
+export class Users{
    public id: number;
    public nickname: string;
    public name: string;
@@ -14,8 +14,8 @@ export class User{
    public permissions: string;
    public passwords: Passwords;
    
- constructor(userId: number, nickname: string, name: string, lastname: string, email: string, permissions: string, passwords: Passwords ){
-    this.id = userId;
+ constructor(usersId: number, nickname: string, name: string, lastname: string, email: string, permissions: string, passwords: Passwords ){
+    this.id = usersId;
     this.nickname = nickname;
     this.name = name;
     this.email = email;
@@ -35,8 +35,8 @@ export class Doctors{
   public passwords: Passwords;
 
   
-constructor(userId: number,nickname: string,name: string,lastname: string,email: string,permissions: string,password: Passwords ){
-   this.id = userId;
+constructor(usersId: number,nickname: string,name: string,lastname: string,email: string,permissions: string,password: Passwords ){
+   this.id = usersId;
    this.nickname = nickname;
    this.name = name;
    this.email = email;
@@ -56,8 +56,8 @@ export class Admins{
   public passwords: Passwords;
 
   
-constructor(userId: number,nickname: string,name: string,lastname: string,email: string,permissions: string, password: Passwords ){
-   this.id = userId;
+constructor(usersId: number,nickname: string,name: string,lastname: string,email: string,permissions: string, password: Passwords ){
+   this.id = usersId;
    this.nickname = nickname
    this.name = name;
    this.email = email;
@@ -74,13 +74,13 @@ export class History{
 public id: number;
 public name: string;
 public description: string;
-public user: User;
+public users: Users;
 public doctors: Doctors;
-constructor(id: number,name: string, description: string, user: User, doctors: Doctors ){
+constructor(id: number,name: string, description: string, users: Users, doctors: Doctors ){
   this.id = id;
   this.name = name;
   this.description = description;
-  this.user = user;
+  this.users = users;
   this.doctors = doctors;
 }
 
@@ -100,13 +100,13 @@ export class Passwords{
 export class DateOfTheVisit{
   public id: number;
   public dateof: string;
-  public user: User;
+  public users: Users;
   public doctors: Doctors;
 
-  constructor(id: number, dateof: string, user: User, doctors: Doctors){
+  constructor(id: number, dateof: string, users: Users, doctors: Doctors){
   this.id = id;
   this.dateof = dateof;
-  this.user = user;
+  this.users = users;
   this.doctors = doctors;
 }
 }
@@ -121,10 +121,17 @@ export class HttpClientService {
     private httpClient: HttpClient
   ) { }
 
+ public deleteAnAppointment(date){
+   return this.httpClient.post<null>('http://localhost:8080//deleteAnAppointment',date);
+ }
+
+  public appointments(){
+    return this.httpClient.get<DateOfTheVisit[]>('http://localhost:8080//appointments');
+  }
 
   getEmployees(id) {
     console.log('test call');
-    return this.httpClient.get<User>('http://localhost:8080//findAllMain1'+'/'+id);
+    return this.httpClient.get<Users>('http://localhost:8080//findAllMain1'+'/'+id);
   }
 
   public getVisit(){
@@ -132,49 +139,45 @@ export class HttpClientService {
   }
 
 
-  public addVisit(dateOfTheVisit){
-    return this.httpClient.put<null>('http://localhost:8080//addTerms',dateOfTheVisit);
+  public addVisit(de){
+    return this.httpClient.put<null>('http://localhost:8080//addTerms',de);
   }
 
-  public addTermsWithoutAccount(user){
-    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccount',user);
+  public addTermsWithoutAccount(users){
+    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccount',users);
   }
 
- public createUser(user) {
-    return this.httpClient.post<User>('http://localhost:8080//create',user);
+ public createUser(users) {
+    return this.httpClient.post<Users>('http://localhost:8080//create',users);
   }
 
   public testDate(y): Observable<String[]>{
     return this.httpClient.post<String[]>('http://localhost:8080//test',y);
   } 
-  public findUser(userNickName): Observable<User>{
-    return this.httpClient.get<User>('http://localhost:8080//findUser'+'/'+ userNickName);
+  public findUser(usersNickName): Observable<Users>{
+    return this.httpClient.get<Users>('http://localhost:8080//findUser'+'/'+ usersNickName);
   } 
 
-  public findUserForAdmin(user): Observable<User[]>{
-    return this.httpClient.post<User[]>('http://localhost:8080//findUserForAdmin', user);
+  public findUserForAdmin(users): Observable<Users[]>{
+    return this.httpClient.post<Users[]>('http://localhost:8080//findUserForAdmin', users);
   } 
-  public findAllUsersForAdmin(): Observable<User[]>{
-    return this.httpClient.get<User[]>('http://localhost:8080//findAllUsersForAdmin');
+  public findAllUsersForAdmin(): Observable<Users[]>{
+    return this.httpClient.get<Users[]>('http://localhost:8080//findAllUsersForAdmin');
   } 
-
-
-public deleteUser(user){
-    return this.httpClient.delete<User>('http://localhost:8080//delete' + '/' + user.userId);
+  public deleteUser(users){
+    return this.httpClient.delete<Users>('http://localhost:8080//delete' + '/' + users.usersId);
   }
-
   public confirmUser(number){
     return this.httpClient.get<null>('http://localhost:8080//contest'+'/'+ number);
   }
+  public userAccount(id): Observable<Users>{
+  return this.httpClient.get<Users>('http://localhost:8080//userAccount' + '/' + id);
+  }
 
-public userAccount(id): Observable<User>{
-  return this.httpClient.get<User>('http://localhost:8080//userAccount' + '/' + id);
-}
-
-  public userLogIn(user): Observable<User>{
+  public userLogIn(users): Observable<Users>{
     //console.log('test call');
-    return this.httpClient.post<User>('http://localhost:8080//userLogInPath', user);
-    //return this.httpClient.get<User>('http://localhost:8080//logIn')
+    return this.httpClient.post<Users>('http://localhost:8080//userLogInPath', users);
+    //return this.httpClient.get<users>('http://localhost:8080//logIn')
   }
 
 }

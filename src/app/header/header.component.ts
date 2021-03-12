@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { HttpClientService, Passwords, User } from '../services/http-client.service';
+import { HttpClientService, Passwords, Users } from '../services/http-client.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-userPermissions: User = new User(0, '', '', '', '', '', null);
+userPermissions: Users = new Users(0, '', '', '', '', '', null);
 
   constructor(public loginService: AuthenticationService,
               public httpClient: HttpClientService ) { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { HttpClientService, User, Passwords } from '../services/http-client.service';
+import { HttpClientService, Users, Passwords } from '../services/http-client.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   email = '';
   passwordd = '';
   passwords: Passwords = new Passwords(0, '');
-  regPass: User = new User(0, '', '', '', '', '', null);
+  regPass: Users = new Users(0, '', '', '', '', '', null);
   constructor(private router: Router,
               private loginservice: AuthenticationService,
               private httpClient: HttpClientService) { }
