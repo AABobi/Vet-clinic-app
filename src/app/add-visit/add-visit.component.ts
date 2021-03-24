@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DateOfTheVisit, HttpClientService, Passwords, Users } from '../services/http-client.service';
+import { DateOfTheVisit, Doctors, HttpClientService, Passwords, Users } from '../services/http-client.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-visit',
   templateUrl: './add-visit.component.html',
@@ -7,62 +8,100 @@ import { DateOfTheVisit, HttpClientService, Passwords, Users } from '../services
 })
 export class AddVisitComponent implements OnInit {
   user: Users = new Users(69, '', '', '', '', '', null);
-  comment: string;
-  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(69, '', this.user, null);
+  dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(null, '', null, null);
+  dateOfTheVisitUnReg: DateOfTheVisit = new DateOfTheVisit(null, '', null, null);
   terms: string;
+  doctorForAdmin: Doctors;
+  doctorsObjNgOnInit: Doctors[] = [];
+  doctorNameAndId;
+  doctors: Doctors[] = [];
+  docIdArr: string[] = [];
   pageApperarance = true;
-  constructor(private httpClient: HttpClientService) {}
+ 
+  constructor(private router: Router, private httpClient: HttpClientService) {}
   // tslint:disable-next-line:ban-types
-  availableTermsFromServer: String[] = [];
+  availableTermsFromServer: string[] = [];
+  
   ngOnInit(): void {
+    this.httpClient.getDoctors().subscribe(data => {
+      this.doctors = data;
+      });
+
     // alert(sessionStorage.getItem('username'));
+    if (sessionStorage.getItem('username') === 'unregister' && this.pageApperarance === true){
+      // alert
+      this.pageApperarance = false;
+    }
     this.httpClient.getVisit().subscribe(
     data => {
     this.availableTermsFromServer = data;
   });
+ 
+    this.httpClient.getDoctors().subscribe(data => {
+    this.doctorsObjNgOnInit = data;
+    });
 }
-
-test(){
-  if(localStorage.getItem('username') === 'admin'){
-    return true;
-   }else{ 
-  return false;
+// Changes vision
+// tslint:disable-next-line:typedef
+availableTerms(){
+  this.pageApperarance = true;
+}
+// Changes vision
+// tslint:disable-next-line:typedef
+back(){
+  this.pageApperarance = false;
+}
+// This metoda gets doctors id
+// tslint:disable-next-line:typedef
+  getDoctorId(){
+  this.doctorNameAndId = document.getElementById('ddlViewBy');
+  const doctorNameAndIdStr = this.doctorNameAndId.options[this.doctorNameAndId.selectedIndex].text;
+  // tslint:disable-next-line:prefer-for-of
+  let docIdArrLoopVariable = 0;
+  for (let i = 0; i < doctorNameAndIdStr.length; i++){
+    if (doctorNameAndIdStr.charAt(i) >= '0' && doctorNameAndIdStr.charAt(i) <= '9') {
+      this.docIdArr[docIdArrLoopVariable] = doctorNameAndIdStr.charAt(i);
+      docIdArrLoopVariable++;
+    }
   }
+  return this.docIdArr;
 }
 
 // tslint:disable-next-line:typedef
-addVisiWithOut(){
-this.user.nickname = this.terms;
-alert(this.terms);
-this.httpClient.addTermsWithoutAccount(this.user).subscribe();
+changeTheDisplayTerms(){
+  let arrayNum = this.availableTermsFromServer.length - 1;
+  this.dateOfTheVisit.dateof = this.availableTermsFromServer[arrayNum];
+  alert(this.dateOfTheVisit.dateof);
+  this.httpClient.changeDate(this.dateOfTheVisit).subscribe(
+    data => {
+    this.availableTermsFromServer = data;
+  
+  });
 }
 
-    // tslint:disable-next-line:typedef
-    /*createTask(name: string, deadline: string) {
-      alert('dupa');
-      this.test.name = name;
-      this.test.lastname = deadline;
-      this.httpClient.testDate(this.test).subscribe(data => {
-      this.test2 = data;
-      alert(this.test2.lastname);
-    });
-    }*/
-    // tslint:disable-next-line:typedef
-    addVisit(terms: string) {
-     this.user.nickname = localStorage.getItem('username');
-     //alert(this.user.nickname);
-     if (this.user.nickname === 'unregister'){
-     this.pageApperarance = false;
-     this.terms = terms;
-     }else{
-     // alert(localStorage.getItem('username'));
-     window.location.reload();
-     // tslint:disable-next-line:no-unused-expression
-     this.dateOfTheVisit.dateof = terms;
-     // this.dateOfTheVisit.id = this.user.id;
-     this.dateOfTheVisit.users = this.user;
-    
-     this.httpClient.addVisit(this.dateOfTheVisit).subscribe();
-     } 
+// tslint:disable-next-line:typedef
+goToAvaiableTerms(){
+this.pageApperarance = true;
+}
+//This method adds date to DB
+// tslint:disable-next-line:typedef
+addVisit(terms: string) {
+      // tslint:disable-next-line:radix
+      const doctorId = parseInt(this.getDoctorId().join(''));
+      let i = 0;
+      for (i; i < this.doctors.length; i++){
+        if (this.doctors[i].id === doctorId){
+          //this.doctorForAdmin = this.doctors[i];
+          this.dateOfTheVisitUnReg.doctors = this.doctors[i];
+        }
+      }
+     // alert(this.dateOfTheVisitUnReg);
+      //this.dateOfTheVisitUnReg.doctors = this.doctorForAdmin;
+      this.dateOfTheVisitUnReg.dateof = terms;
+      this.dateOfTheVisitUnReg.users = this.user;
+      this.httpClient.addTermsWithoutAccount(this.dateOfTheVisitUnReg).subscribe();
+      window.location.reload();
+     // this.pageApperarance = true;
+
 }
 }

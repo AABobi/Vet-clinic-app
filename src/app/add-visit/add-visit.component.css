@@ -5,3 +5,25 @@
     margin-right:35%;
     background-color: #ce1111;
   }
+  .terms{
+    color:white;
+    width:17%;
+    margin-left:8%;
+    margin-right:35%;
+    background-color: #ce8c11;
+  }
+
+  .confirm{
+    color:white;
+    width:17%;
+    margin-left:8%;
+    margin-right:35%;
+    background-color: #ce9211;
+  }
+  .back{
+    color:white;
+    width:30%;
+    margin-left:110%;
+    margin-right:35%;
+    background-color: #ce9211;
+  }

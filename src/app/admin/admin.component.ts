@@ -11,11 +11,11 @@ export class AdminComponent implements OnInit {
 nickname = '';
 // name;
 // lastName;
-user: Users = new Users(0, '', '', '', '', '', null);
+user: Users = new Users(null, '', '', '', '', '', null);
 
 dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(0, '', null, null);
-
-adminLookingForUser: Users = new Users(0, '', '', '', '', '', null);
+vision = null;
+adminLookingForUser: Users = new Users(null, '', '', '', '', '', null);
 
 usersArray: Users[] = [];
 
@@ -27,20 +27,35 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
   }
 
   // tslint:disable-next-line:typedef
-  test(){
-    return false;
+  test(vision: string){
+    if(vision === 'findAll'){
+    return true;
+    }else{
+      return false;
+    }
   }
   // Method sends information about users what admin looking for.
   // Server sends back specified information (found or not found)
   // tslint:disable-next-line:typedef
    // tslint:disable-next-line:typedef
   deleteAnAppointment(date: DateOfTheVisit){
-   this.httpClient.deleteAnAppointment(date).subscribe();
-  }
-  
+   this.httpClient.deleteAnAppointment(date).subscribe(data => {
+    this.dateOfTheVisitArray = data;
+  });
+   
+ }
+
+ // tslint:disable-next-line:typedef
+ changeDate(date: DateOfTheVisit){
+  this.httpClient.deleteAnAppointment(date).subscribe(data => {
+    this.dateOfTheVisitArray = data;
+  });
+  this.router.navigate(['AddVisitComponent']);
+ }
+ 
+  // tslint:disable-next-line:typedef
   findUserForAdmin(){
-    // this.adminLookingForUser.name = this.name;
-    // this.adminLookingForUser.lastname = this.lastName;
+    this.vision = true;
     this.httpClient.findUserForAdmin(this.adminLookingForUser).subscribe(data =>{
     this.usersArray = data;
     });
@@ -57,6 +72,7 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
   // Gets all users from database.
   // tslint:disable-next-line:typedef
   findAllUsersForAdmin(){
+    this.vision = true;
     this.httpClient.findAllUsersForAdmin().subscribe(data =>{
       this.usersArray = data;
     });
@@ -65,16 +81,14 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
   // Switch to free terms
   // tslint:disable-next-line:typedef
   goToTerms(user: Users){
-   if(this.nickname === ''){
-    this.router.navigate(['AddVisitComponent']);
-  }else{
+    this.user.nickname = 'Just want to see available terms'
     sessionStorage.setItem('username', user.nickname );
     this.router.navigate(['AddVisitComponent']);
-   }
   }
     // Switch to free terms
  // tslint:disable-next-line:typedef
-  goToTerms2(user: Users){
+  goToTermsUnReg(user: Users){
+    this.vision = true;
     if(this.nickname === ''){
      sessionStorage.setItem('username', 'unregister');
      this.router.navigate(['AddVisitComponent']);

@@ -121,9 +121,18 @@ export class HttpClientService {
     private httpClient: HttpClient
   ) { }
 
- public deleteAnAppointment(date){
-   return this.httpClient.post<null>('http://localhost:8080//deleteAnAppointment',date);
+ public getDoctors(){
+   return this.httpClient.get<Doctors[]>('http://localhost:8080//getDoctors');
  }
+
+ public deleteAnAppointment(date){
+   return this.httpClient.post<DateOfTheVisit[]>('http://localhost:8080//deleteAnAppointment',date);
+ }
+
+ public changeDate(date){
+  return this.httpClient.post<string[]>('http://localhost:8080//getVisitTermsWithFutureDate',date);
+}
+
 
   public appointments(){
     return this.httpClient.get<DateOfTheVisit[]>('http://localhost:8080//appointments');
@@ -135,7 +144,7 @@ export class HttpClientService {
   }
 
   public getVisit(){
-    return this.httpClient.get<String[]>('http://localhost:8080//getTerms');
+    return this.httpClient.get<string[]>('http://localhost:8080//getTerms');
   }
 
 
@@ -143,9 +152,14 @@ export class HttpClientService {
     return this.httpClient.put<null>('http://localhost:8080//addTerms',de);
   }
 
-  public addTermsWithoutAccount(users){
-    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccount',users);
+  public addTermsWithoutAccount(date){
+    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccount',date);
   }
+
+  public addTermsWithoutAccountTest(Doctors){
+    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccountTest',Doctors);
+  }
+
 
  public createUser(users) {
     return this.httpClient.post<Users>('http://localhost:8080//create',users);

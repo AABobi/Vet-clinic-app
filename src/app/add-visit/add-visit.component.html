@@ -3,13 +3,22 @@
       <thead>
       <tr>
         <th>Terms</th>
-      </tr>
+        <select id="ddlViewBy">
+          <option  *ngFor="let docTest of doctors">
+           {{ docTest.name }}
+           {{ docTest.id }}
+       </option>
+       </select>
+      <td>{{availableTermsFromServer[0]}}</td>
+      <td>-</td>
+      <td>{{availableTermsFromServer[availableTermsFromServer.length-1]}}</td>
+      <button class="btn btn-danger" onClick="refreshPage()" (click)="changeTheDisplayTerms()"> changeTheDisplayTerms</button>
       </thead>
+      <button class="back" onClick="refreshPage()" (click)="addVisit(availableTerms)"> Back </button>
       <tbody>
           <tr *ngFor="let availableTerms of availableTermsFromServer">
               <td>{{availableTerms}}</td>
               <td><button class="btn btn-danger" onClick="refreshPage()" (click)="addVisit(availableTerms)"> Add visit</button></td>
-              
           </tr>
       </tbody>
   </table>
@@ -22,10 +31,12 @@
         User Lastname : <input type="text" name="user.lastname" [(ngModel)]="user.lastname">
       </div>
   
-      <button  (click)=addVisiWithOut()   class="btn button">
-          Make an appointment
+      <button  (click)=goToAvaiableTerms()   class="confirm">
+          Confirm
       </button>
-      
+      <button  (click)=availableTerms()   class="terms">
+        terms
+    </button>
     
     
     

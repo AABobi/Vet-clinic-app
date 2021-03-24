@@ -7,10 +7,10 @@
     <button  class="btn find" (click)=findUserForAdmin()>FIND</button>
     <button  class="btn find2" (click)=findAllUsersForAdmin()>FIND ALL</button>
   </div>
-  <button class="btn terms" (click)="goToTerms(user)">Go to free terms</button>
-  <button class="btn button" (click)="goToTerms2(user)">Make an appointment for unregister user</button>
+  <button class="btn terms" (click)="goToTerms(user)" >Go to free terms</button>
+  <button class="btn button" (click)="goToTermsUnReg(user)">Make an appointment for unregister user</button>
   <button class="btn deleteApp" (click)="appointments()">Delete an appointment</button>
-  <div *ngIf="test()">
+  <div *ngIf="vision">
   <table class="table table-striped">
     <thead>
     <tr>
@@ -31,7 +31,7 @@
         </tbody>
   </table>
         </div>
-        <div *ngIf="!test()">
+        <div *ngIf="!vision">
         <table class="table table-striped">
           <thead>
           <tr>
@@ -48,6 +48,7 @@
                   <td>{{date.users.name}}</td>
                   <td>{{date.users.lastname}}</td>
                   <button  (click)=deleteAnAppointment(date)  class="btn btn-success" > Delete an appointment </button>
+                  <button  (click)=changeDate(date)  class="changeDate" > Change date </button>
                   </tr>
                   <td></td>
               </tbody>
