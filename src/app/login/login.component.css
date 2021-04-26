@@ -7,3 +7,10 @@
   width: 100%;
   clear: both;
 }
+.fastLoginButtonDoc{
+  color:white;
+  width:35%;
+  margin-left:0%;
+  margin-right:55%;
+  background-color: #0d3fca;
+}

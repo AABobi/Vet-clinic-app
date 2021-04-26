@@ -10,40 +10,42 @@ export class AddVisitComponent implements OnInit {
   user: Users = new Users(69, '', '', '', '', '', null);
   dateOfTheVisit: DateOfTheVisit = new DateOfTheVisit(null, '', null, null);
   dateOfTheVisitUnReg: DateOfTheVisit = new DateOfTheVisit(null, '', null, null);
-  terms: string;
   doctorForAdmin: Doctors;
   doctorsObjNgOnInit: Doctors[] = [];
   doctorNameAndId;
   doctors: Doctors[] = [];
   docIdArr: string[] = [];
   pageApperarance = true;
- 
+  displayDateIterator = 1;
+  test = 1;
   constructor(private router: Router, private httpClient: HttpClientService) {}
   // tslint:disable-next-line:ban-types
-  availableTermsFromServer: string[] = [];
-  
+  availableHoursFromServer: string[] = [];
+
   ngOnInit(): void {
+
+
     this.httpClient.getDoctors().subscribe(data => {
       this.doctors = data;
       });
-
     // alert(sessionStorage.getItem('username'));
-    if (sessionStorage.getItem('username') === 'unregister' && this.pageApperarance === true){
-      // alert
+    // tslint:disable-next-line:max-line-length
+    if ((sessionStorage.getItem('username') === 'unregister' && sessionStorage.getItem('makeAnAppointmentName') === '') && this.pageApperarance === true){
       this.pageApperarance = false;
     }
-    this.httpClient.getVisit().subscribe(
+  
+    /*this.httpClient.getAllVisit().subscribe(
     data => {
-    this.availableTermsFromServer = data;
-  });
- 
+   
+  });*/
+
     this.httpClient.getDoctors().subscribe(data => {
     this.doctorsObjNgOnInit = data;
     });
 }
 // Changes vision
 // tslint:disable-next-line:typedef
-availableTerms(){
+availableHours(){
   this.pageApperarance = true;
 }
 // Changes vision
@@ -68,40 +70,72 @@ back(){
 }
 
 // tslint:disable-next-line:typedef
-changeTheDisplayTerms(){
-  let arrayNum = this.availableTermsFromServer.length - 1;
-  this.dateOfTheVisit.dateof = this.availableTermsFromServer[arrayNum];
-  alert(this.dateOfTheVisit.dateof);
+hoursForSelectedDoctor(){
+      const doctorId = parseInt(this.getDoctorId().join(''));
+      let doctor: Doctors;
+      let i = 0;
+      for (i; i < this.doctors.length; i++){
+        if (this.doctors[i].id === doctorId){
+          // this.doctorForAdmin = this.doctors[i];
+          doctor = this.doctors[i];
+        }
+      }
+    
+      this.httpClient.findHoursForSelectedDoctor(doctor).subscribe(
+        data => {
+          this.availableHoursFromServer = data;
+        });
+      this.displayDateIterator = 2;
+      }
+
+// tslint:disable-next-line:typedef
+changeTheDisplayHours(){
+  const arrayNum = this.availableHoursFromServer.length - 1;
+  this.dateOfTheVisit.dateof = this.availableHoursFromServer[arrayNum];
+ // alert(this.dateOfTheVisit.dateof);
   this.httpClient.changeDate(this.dateOfTheVisit).subscribe(
     data => {
-    this.availableTermsFromServer = data;
-  
+    this.availableHoursFromServer = data;
+
   });
 }
 
 // tslint:disable-next-line:typedef
-goToAvaiableTerms(){
+goToAvaiableHours(){
 this.pageApperarance = true;
 }
-//This method adds date to DB
+// This method adds date to DB
 // tslint:disable-next-line:typedef
-addVisit(terms: string) {
+addVisit(Hours: string) {
       // tslint:disable-next-line:radix
       const doctorId = parseInt(this.getDoctorId().join(''));
       let i = 0;
       for (i; i < this.doctors.length; i++){
         if (this.doctors[i].id === doctorId){
-          //this.doctorForAdmin = this.doctors[i];
           this.dateOfTheVisitUnReg.doctors = this.doctors[i];
         }
       }
-     // alert(this.dateOfTheVisitUnReg);
-      //this.dateOfTheVisitUnReg.doctors = this.doctorForAdmin;
-      this.dateOfTheVisitUnReg.dateof = terms;
       this.dateOfTheVisitUnReg.users = this.user;
-      this.httpClient.addTermsWithoutAccount(this.dateOfTheVisitUnReg).subscribe();
-      window.location.reload();
-     // this.pageApperarance = true;
+      this.dateOfTheVisitUnReg.dateof = Hours;
+      if (sessionStorage.getItem('username') === 'unregister' && sessionStorage.getItem('makeAnAppointmentName') === ''){
+
+        this.httpClient.addHoursWithoutAccount(this.dateOfTheVisitUnReg).subscribe();
+       
+        window.location.reload();
+      }else{
+        this.dateOfTheVisitUnReg.users.name = sessionStorage.getItem('makeAnAppointmentName');
+        this.dateOfTheVisitUnReg.users.lastname = sessionStorage.getItem('makeAnAppointmentLastName');
+        this.dateOfTheVisitUnReg.users.email = sessionStorage.getItem('makeAnAppointmentEmail');
+        for (let i = 0; i < sessionStorage.length; i++){
+          let key = sessionStorage.key(i);
+          let value = sessionStorage.getItem(key);
+          console.log(key, value);
+        }
+        this.httpClient.addHours(this.dateOfTheVisitUnReg).subscribe();
+        window.location.reload();
+      }
+     
+  
 
 }
 }

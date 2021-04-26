@@ -12,5 +12,12 @@ export class UserAccountComponent implements OnInit {
   
  // tslint:disable-next-line:typedef
   ngOnInit() {
-    }
-}
+    /*for (let i = 0; i < localStorage.length; i++){
+      let key = sessionStorage.key(i);
+      let value = sessionStorage.getItem(key);
+      let key1 = localStorage.key(i);
+      let value1 = localStorage.getItem(key1);
+      console.log(key, value);
+      console.log(key, value1);
+    }*/
+}}

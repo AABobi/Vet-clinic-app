@@ -1,28 +1,21 @@
-<!--<html>
-<div class="col-md-6">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-              <th>name</th>
-              <th>designation</th>
-              <th>salary</th>
-              </tr>
-            </thead>
-        <tbody>
-     <tr *ngFor="let user of usersUAC">
-        <td>{{user.userId}}</td>
-        <td>{{user.name}}</td>
-        <td>{{user.lastname}}</td>
-        <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete Employee</button></td>
-    </tr>
-</tbody>
-</table>-
-<form>
-    <button  class="btn btn-danger" (click)="test()"> de</button>
- 
-   
-</form>
-
-
-</div>
-</html>-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+ <meta http-equiv="Content-type" content="application/xhtml+xml; charset=utf-8" />
+ <title>Dwie tabelki obok siebie</title>
+ <style type="text/css">
+	td {background: #80ff80; padding: 5px;}
+	#pierwsza {float: left;}
+ </style>
+</head>
+<body>
+<table id="pierwsza">
+	<tr><td>komórka 1.1</td><td>komórka 1.2</td></tr>
+	<tr><td>komórka 1.3</td><td>komórka 1.4</td></tr>
+	<tr><td>komórka 1.5</td><td>komórka 1.6</td></tr>
+</table>
+<table>
+	<tr><td>komórka 2.1</td><td>komórka 2.2</td></tr>
+	<tr><td>komórka 2.3</td><td>komórka 2.4</td></tr>
+</table>
+</body>
+</html>

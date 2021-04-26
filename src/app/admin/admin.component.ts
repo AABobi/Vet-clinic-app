@@ -47,9 +47,7 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
 
  // tslint:disable-next-line:typedef
  changeDate(date: DateOfTheVisit){
-  this.httpClient.deleteAnAppointment(date).subscribe(data => {
-    this.dateOfTheVisitArray = data;
-  });
+  this.httpClient.deleteAnAppointment(date).subscribe();
   this.router.navigate(['AddVisitComponent']);
  }
  
@@ -78,32 +76,44 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
     });
   }
 
-  // Switch to free terms
+  // for make an appointment (after find user)
+  // Switch to free Hours
   // tslint:disable-next-line:typedef
-  goToTerms(user: Users){
-    this.user.nickname = 'Just want to see available terms'
-    sessionStorage.setItem('username', user.nickname );
+  goToHours(user: Users){
+    // this.user.nickname = 'Just want to see available Hours'
+    sessionStorage.setItem('makeAnAppointmentName',  user.name);
+    sessionStorage.setItem('makeAnAppointmentLastName', user.lastname );
+    sessionStorage.setItem('makeAnAppointmentEmail', user.email);
+    for (let i = 0; i < sessionStorage.length; i++){
+      let key = sessionStorage.key(i);
+      let value = sessionStorage.getItem(key);
+      console.log(key, value);
+    }
     this.router.navigate(['AddVisitComponent']);
   }
-    // Switch to free terms
  // tslint:disable-next-line:typedef
-  goToTermsUnReg(user: Users){
+  showInformation(user: Users){
+         this.httpClient.showInformation(user).subscribe();
+  }
+    // Switch to free Hours
+ // tslint:disable-next-line:typedef
+  goToHoursUnReg(user: Users){
     this.vision = true;
     if(this.nickname === ''){
-     sessionStorage.setItem('username', 'unregister');
-     this.router.navigate(['AddVisitComponent']);
+      sessionStorage.setItem('username', 'unregister');
+      this.router.navigate(['AddVisitComponent']);
    }else{
      sessionStorage.setItem('username', user.nickname );
      this.router.navigate(['AddVisitComponent']);
     }
    }
 
-  // Adds term do the DB(sends to server)
+  // Adds Hour do the DB(sends to server)
   // tslint:disable-next-line:typedef
-  addVisit(terms: string) {
+  addVisit(Hours: string) {
     this.user.nickname = sessionStorage.getItem('username');
     window.location.reload();
-    this.dateOfTheVisit.dateof = terms;
-    this.httpClient.addVisit(this.user).subscribe();
+    this.dateOfTheVisit.dateof = Hours;
+    this.httpClient.addHours(this.user).subscribe();
 }
 }

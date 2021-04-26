@@ -21,10 +21,10 @@ this.httpClient.findUser(sessionStorage.getItem('username')).subscribe(data => {
   //When server return String "admin" then this method return true and activates admin panel else - normal user view
   // tslint:disable-next-line:typedef
   test(){
-    if(localStorage.getItem('username') === 'admin'){
+    if(localStorage.getItem('username') === 'admin' || localStorage.getItem('username') === 'doctor'){
       return true;
      }else{ 
-    return false;
+      return false;
     }
   }
 }

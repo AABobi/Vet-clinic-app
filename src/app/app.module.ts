@@ -13,6 +13,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { AddVisitComponent } from './add-visit/add-visit.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { AddVisitSecondpartComponent } from './add-visit-secondpart/add-visit-secondpart.component';
+import { DoctorComponent } from './doctor/doctor.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 
 
@@ -27,7 +30,10 @@ import { AdminComponent } from './admin/admin.component';
     LogoutComponent,
     AddVisitComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    AddVisitSecondpartComponent,
+    DoctorComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,

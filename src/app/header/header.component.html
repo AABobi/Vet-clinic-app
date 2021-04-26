@@ -11,6 +11,7 @@
         <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/UserAccountComponent" class="nav-link">User account</a></li>
         <!--<li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/AdminComponent" class="nav-link">Add visit</a></li>-->
         <li><a *ngIf="loginService.adminAccess()" routerLink="/AdminComponent" class="nav-link">Admin Panel</a></li>
+        <li><a *ngIf="loginService.doctorAccess()" routerLink="/DoctorComponent" class="nav-link">Doctor panel</a></li>
        <!-- <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">userlogin</a></li>-->
         <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/LoginComponent" class="nav-link">Login</a></li>
         <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/RegisterComponent" class="nav-link">New account</a></li>

@@ -1,0 +1,19 @@
+<table class="table table-striped">
+   
+    <thead>
+    <tr>
+      <th>nickname</th>
+      <th>name</th>
+      <th>hours</th>
+      </tr>
+    </thead>
+<tbody>
+    <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.lastname}}</td>
+        <td>{{user.permissions}}</td>
+    <td><button class="btn btn-danger" > Show information</button></td>
+    <td><button class="btn btn-danger" (click)="deleteAnAppointment(user)"> Delete</button></td>
+    </tr>
+</tbody>
+</table>

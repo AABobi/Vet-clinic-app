@@ -129,8 +129,15 @@ export class HttpClientService {
    return this.httpClient.post<DateOfTheVisit[]>('http://localhost:8080//deleteAnAppointment',date);
  }
 
+
+public getTodaysAppointment(id){
+  return this.httpClient.get<DateOfTheVisit[]>('http://localhost:8080//getTodaysAppointment'+'/'+id)
+}
+public getTodaysAppointmentUsers(id){
+  return this.httpClient.get<Users[]>('http://localhost:8080//getTodaysAppointmentUsers'+'/'+id)
+}
  public changeDate(date){
-  return this.httpClient.post<string[]>('http://localhost:8080//getVisitTermsWithFutureDate',date);
+  return this.httpClient.post<string[]>('http://localhost:8080//getVisitHoursWithFutureDate',date);
 }
 
 
@@ -138,26 +145,25 @@ export class HttpClientService {
     return this.httpClient.get<DateOfTheVisit[]>('http://localhost:8080//appointments');
   }
 
-  getEmployees(id) {
+  public getEmployees(id) {
     console.log('test call');
     return this.httpClient.get<Users>('http://localhost:8080//findAllMain1'+'/'+id);
   }
 
-  public getVisit(){
-    return this.httpClient.get<string[]>('http://localhost:8080//getTerms');
+  public showInformation(user){
+    return this.httpClient.get<Users>('http://localhost:8080//showInformation',user);
   }
 
-
-  public addVisit(de){
-    return this.httpClient.put<null>('http://localhost:8080//addTerms',de);
+  public addHours(de){
+    return this.httpClient.put<null>('http://localhost:8080//addHours',de);
   }
 
-  public addTermsWithoutAccount(date){
-    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccount',date);
+  public addHoursWithoutAccount(date){
+    return this.httpClient.put<null>('http://localhost:8080//addHoursWithoutAccount',date);
   }
 
-  public addTermsWithoutAccountTest(Doctors){
-    return this.httpClient.put<null>('http://localhost:8080//addTermsWithoutAccountTest',Doctors);
+  public addHoursWithoutAccountTest(Doctors){
+    return this.httpClient.put<null>('http://localhost:8080//addHoursWithoutAccountTest',Doctors);
   }
 
 
@@ -170,6 +176,10 @@ export class HttpClientService {
   } 
   public findUser(usersNickName): Observable<Users>{
     return this.httpClient.get<Users>('http://localhost:8080//findUser'+'/'+ usersNickName);
+  } 
+ 
+  public findHoursForSelectedDoctor(users): Observable<string[]>{
+    return this.httpClient.post<string[]>('http://localhost:8080//findHoursForSelectedDoctor', users);
   } 
 
   public findUserForAdmin(users): Observable<Users[]>{

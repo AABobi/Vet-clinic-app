@@ -5,7 +5,6 @@ import { HttpClientService, Users } from './http-client.service';
   providedIn: 'root'
 })
 export class AuthenticationService implements OnInit {
- // findUserObj: User = new User('', '', '');
   constructor(
     private httpClient: HttpClientService
   ) { }
@@ -14,31 +13,24 @@ export class AuthenticationService implements OnInit {
   // tslint:disable-next-line:contextual-lifecycle
   ngOnInit(): void {}
 
-
-
-  // tslint:disable-next-line: typedef
- /* authenticate(username, password, testObj) {
-if (username === 'j' && password === 'pas') {
-      sessionStorage.setItem('username', username);
-      return true;
-    } else {
-      return false;
-    }
-  
-  }*/
-
   // tslint:disable-next-line: typedef
   isUserLoggedIn() {
-    const user = sessionStorage.getItem('username');
+    const user = sessionStorage.getItem('function');
     console.log(!(user === null));
     return !(user === null);
   }
 
   // tslint:disable-next-line: typedef
   adminAccess() {
-    const user = sessionStorage.getItem('username');
-    console.log(!(user === null));
-    return !(user === null);
+    const user = sessionStorage.getItem('function');
+    console.log(user);
+    return (user === 'admin');
+  }
+// tslint:disable-next-line: typedef
+  doctorAccess() {
+    const user = sessionStorage.getItem('function');
+    console.log(!(user === 'doctor'));
+    return (user === 'doctor');
   }
 
   // tslint:disable-next-line: typedef

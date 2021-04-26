@@ -1,29 +1,32 @@
+
 <div  *ngIf="pageApperarance" class="container">
   <table class="table table-striped">
       <thead>
       <tr>
-        <th>Terms</th>
+        <th>Hours</th>
         <select id="ddlViewBy">
           <option  *ngFor="let docTest of doctors">
            {{ docTest.name }}
            {{ docTest.id }}
        </option>
        </select>
-      <td>{{availableTermsFromServer[0]}}</td>
+      <td>{{availableHoursFromServer[0]}}</td>
       <td>-</td>
-      <td>{{availableTermsFromServer[availableTermsFromServer.length-1]}}</td>
-      <button class="btn btn-danger" onClick="refreshPage()" (click)="changeTheDisplayTerms()"> changeTheDisplayTerms</button>
+      <td>{{availableHoursFromServer[availableHoursFromServer.length-displayDateIterator]}}</td>
+      <button class="btn btn-danger" onClick="refreshPage()" (click)="changeTheDisplayHours()"> changeTheDisplayHours</button>
       </thead>
-      <button class="back" onClick="refreshPage()" (click)="addVisit(availableTerms)"> Back </button>
+      <button class="back" onClick="refreshPage()" (click)="addVisit(availableHours)"> Back </button>
+      <button class="selectedDoctor"  (click)="hoursForSelectedDoctor()"> Hours for selected doctor </button>
+
       <tbody>
-          <tr *ngFor="let availableTerms of availableTermsFromServer">
-              <td>{{availableTerms}}</td>
-              <td><button class="btn btn-danger" onClick="refreshPage()" (click)="addVisit(availableTerms)"> Add visit</button></td>
+          <tr *ngFor="let availableHours of availableHoursFromServer">
+              <td>{{availableHours}}</td>
+              <td><button class="btn btn-danger"  (click)="addVisit(availableHours)"> Add visit</button></td>
           </tr>
       </tbody>
   </table>
-  
-  </div>
+</div>
+
   <div  *ngIf="!pageApperarance" class="container">
     
       <div>
@@ -31,17 +34,13 @@
         User Lastname : <input type="text" name="user.lastname" [(ngModel)]="user.lastname">
       </div>
   
-      <button  (click)=goToAvaiableTerms()   class="confirm">
+      <button  (click)=goToAvaiableHours()   class="confirm">
           Confirm
       </button>
-      <button  (click)=availableTerms()   class="terms">
-        terms
+      <button  (click)=availableHours()   class="terms">
+        Hours
     </button>
-    
-    
-    
-      
-    
-      <div style="background-color:grey;"></div>
+    <div style="background-color:grey;"></div>
     
     </div>
+  

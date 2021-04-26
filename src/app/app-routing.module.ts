@@ -8,10 +8,12 @@ import { from } from 'rxjs';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthGaurdService } from './services/auth-gaurd.service';
+import {AddVisitSecondpartComponent} from './add-visit-secondpart/add-visit-secondpart.component';
 import {AddVisitComponent} from './add-visit/add-visit.component';
 import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './admin/admin.component';
 import {AdminGuardService} from './services/admin-guard.service';
+import {DoctorComponent} from './doctor/doctor.component';
 /*{path: 'UserAccountComponent', component: UserAccountComponent,canActivate:[AuthGaurdService] },
 {path: '', component: UserLogInComponent,canActivate:[AuthGaurdService]},
 { path: 'login', component: LoginComponent},
@@ -24,7 +26,10 @@ const routes: Routes = [
 { path: 'login', component: LoginComponent},
 { path: 'logout', component: LogoutComponent },AdminComponent
 ];*/
+
 {path: 'AddVisitComponent', component: AddVisitComponent,canActivate:[AuthGaurdService]},
+{path: 'DoctorComponent', component: DoctorComponent,canActivate:[AuthGaurdService]},
+{path: 'AddVisitSecondpartComponent', component: AddVisitSecondpartComponent,canActivate:[AuthGaurdService]},
 {path: 'UserAccountComponent', component: UserAccountComponent,canActivate:[AuthGaurdService] },
 {path: 'RegisterComponent', component: RegisterComponent},
 {path: 'UserLogInComponent/:id', component: UserLogInComponent},

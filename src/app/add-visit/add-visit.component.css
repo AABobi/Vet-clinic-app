@@ -12,7 +12,13 @@
     margin-right:35%;
     background-color: #ce8c11;
   }
-
+  .selectedDoctor{
+    color:white;
+    width:50%;
+    margin-left:100%;
+    margin-right:35%;
+    background-color: #ce9211;
+  }
   .confirm{
     color:white;
     width:17%;

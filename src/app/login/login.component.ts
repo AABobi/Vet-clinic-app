@@ -33,14 +33,19 @@ export class LoginComponent implements OnInit {
 
 
 // tslint:disable-next-line:typedef
-fastLog(){
+fastLogAdmin(){
  // alert('true');
- sessionStorage.setItem('username', 'admin');
+ sessionStorage.setItem('function', 'admin');
  localStorage.setItem('username', 'admin')
  this.router.navigate(['UserAccountComponent']);
 }
-
-
+// tslint:disable-next-line:typedef
+fastLoginDoctor(){
+  sessionStorage.setItem('function', 'doctor');
+  sessionStorage.setItem('doctorId', '1');
+  localStorage.setItem('username', 'doctor')
+  this.router.navigate(['UserAccountComponent']);
+}
   
   // tslint:disable-next-line:typedef
   checkLogin() {
