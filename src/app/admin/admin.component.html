@@ -7,9 +7,9 @@
     <button  class="btn find" (click)=findUserForAdmin()>FIND</button>
     <button  class="btn find2" (click)=findAllUsersForAdmin()>FIND ALL</button>
   </div>
-  <button class="btn terms" (click)="goToHours(user)" >Go to free Hours</button>
-  <button class="btn button" (click)="goToHoursUnReg(user)">Make an appointment for unregister user</button>
-  <button class="btn deleteApp" (click)="appointments()">Delete an appointment</button>
+  <button class="terms" (click)="goToHours(user)" >Go to free Hours</button>
+  <button class="button" (click)="goToHoursUnReg(user)">Make an appointment for unregister user</button>
+  <button class="deleteApp" (click)="appointments()">Appointments</button>
   <div *ngIf="vision">
   <table class="table table-striped">
     <thead>
@@ -24,8 +24,9 @@
             <td>{{user.nickname}}</td>
             <td>{{user.name}}</td>
             <td>{{user.lastname}}</td>
-            <td><button class="btn maa" (click)="goToHours(user)">Make an appointment </button></td>
-            <td><button class="btn showInf" (click)="showInformation(user)">Show information </button></td>
+            <td><button class="maa" (click)="goToHours(user)">Make an appointment </button></td>
+            <td><button class="showInf" (click)="showInformation(user)">Show information </button></td>
+            <td><button class="showInf" (click)="deleteUser(user)">Delete user </button></td>
             </tr>
             <td></td>
         </tbody>
@@ -47,8 +48,9 @@
                   <td>{{date.users.nickname}}</td>
                   <td>{{date.users.name}}</td>
                   <td>{{date.users.lastname}}</td>
-                  <button  (click)=deleteAnAppointment(date)  class="btn btn-success" > Delete an appointment </button>
+                  <button  (click)=deleteAnAppointment(date)  class="btn-success" > Delete an appointment </button>
                   <button  (click)=changeDate(date)  class="changeDate" > Change date </button>
+                
                   </tr>
                   <td></td>
               </tbody>

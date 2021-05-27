@@ -14,6 +14,8 @@ import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './admin/admin.component';
 import {AdminGuardService} from './services/admin-guard.service';
 import {DoctorComponent} from './doctor/doctor.component';
+import {SettingsComponent} from './settings/settings.component'
+import {ConfirmationComponent} from './confirmation/confirmation.component';
 /*{path: 'UserAccountComponent', component: UserAccountComponent,canActivate:[AuthGaurdService] },
 {path: '', component: UserLogInComponent,canActivate:[AuthGaurdService]},
 { path: 'login', component: LoginComponent},
@@ -33,6 +35,8 @@ const routes: Routes = [
 {path: 'UserAccountComponent', component: UserAccountComponent,canActivate:[AuthGaurdService] },
 {path: 'RegisterComponent', component: RegisterComponent},
 {path: 'UserLogInComponent/:id', component: UserLogInComponent},
+{path: 'SettingsComponent', component: SettingsComponent, canActivate:[AuthGaurdService] },
+{path: 'ConfirmationComponent', component: ConfirmationComponent, canActivate:[AuthGaurdService] },
 { path: 'LoginComponent', component: LoginComponent},
 { path: '', component: LoginComponent},
 { path: 'LogoutComponent', component: LogoutComponent,canActivate:[AuthGaurdService]  },

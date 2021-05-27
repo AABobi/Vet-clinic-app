@@ -16,6 +16,7 @@
         <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/LoginComponent" class="nav-link">Login</a></li>
         <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/RegisterComponent" class="nav-link">New account</a></li>
         <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/LogoutComponent" class="nav-link">Logout</a></li>
+        <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/SettingsComponent" class="nav-link">SettingsComponent</a></li>
       </ul>
       
       </nav>

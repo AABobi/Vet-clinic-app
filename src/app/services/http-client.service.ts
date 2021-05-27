@@ -137,7 +137,7 @@ public getTodaysAppointmentUsers(id){
   return this.httpClient.get<Users[]>('http://localhost:8080//getTodaysAppointmentUsers'+'/'+id)
 }
  public changeDate(date){
-  return this.httpClient.post<string[]>('http://localhost:8080//getVisitHoursWithFutureDate',date);
+  return this.httpClient.post<null>('http://localhost:8080//changeDate',date);
 }
 
 

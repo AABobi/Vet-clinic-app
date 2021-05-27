@@ -16,6 +16,8 @@ import { AdminComponent } from './admin/admin.component';
 import { AddVisitSecondpartComponent } from './add-visit-secondpart/add-visit-secondpart.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 
 
@@ -33,7 +35,9 @@ import { UserCardComponent } from './user-card/user-card.component';
     AdminComponent,
     AddVisitSecondpartComponent,
     DoctorComponent,
-    UserCardComponent
+    UserCardComponent,
+    SettingsComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

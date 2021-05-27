@@ -26,14 +26,25 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
   ngOnInit(): void {
   }
 
+    // This method gets all appointments from DB.
+  // Displays dates in a table and admin can delete any date from DB.
   // tslint:disable-next-line:typedef
-  test(vision: string){
-    if(vision === 'findAll'){
-    return true;
-    }else{
-      return false;
-    }
+  appointments(){
+    this.vision = false;
+    this.httpClient.appointments().subscribe(data => {
+     this.dateOfTheVisitArray = data;
+   });
   }
+  
+    // Adds Hour do the DB(sends to server)
+  // tslint:disable-next-line:typedef
+  addVisit(Hours: string) {
+    this.user.nickname = sessionStorage.getItem('username');
+    window.location.reload();
+    this.dateOfTheVisit.dateof = Hours;
+    this.httpClient.addHours(this.user).subscribe();
+}
+
   // Method sends information about users what admin looking for.
   // Server sends back specified information (found or not found)
   // tslint:disable-next-line:typedef
@@ -45,9 +56,17 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
    
  }
 
+ deleteUser(user: Users){
+ alert('Are you sure?');
+ sessionStorage.setItem('deleteUserAdminComponent', null);
+ this.router.navigate(['ConfirmationComponent']);
+ }
+ // TO DO - make it with delete an appointment last 
  // tslint:disable-next-line:typedef
  changeDate(date: DateOfTheVisit){
   this.httpClient.deleteAnAppointment(date).subscribe();
+  sessionStorage.setItem('changeDateName', date.users.name);
+  sessionStorage.setItem('changeDateLastName', date.users.lastname);
   this.router.navigate(['AddVisitComponent']);
  }
  
@@ -58,14 +77,7 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
     this.usersArray = data;
     });
   }
-  // This method gets all appointments from DB.
-  // Displays dates in a table and admin can delete any date from DB.
-  // tslint:disable-next-line:typedef
-  appointments(){
-   this.httpClient.appointments().subscribe(data => {
-     this.dateOfTheVisitArray = data;
-   });
-  }
+
 
   // Gets all users from database.
   // tslint:disable-next-line:typedef
@@ -108,12 +120,13 @@ dateOfTheVisitArray: DateOfTheVisit[] = [];
     }
    }
 
-  // Adds Hour do the DB(sends to server)
+  
   // tslint:disable-next-line:typedef
-  addVisit(Hours: string) {
-    this.user.nickname = sessionStorage.getItem('username');
-    window.location.reload();
-    this.dateOfTheVisit.dateof = Hours;
-    this.httpClient.addHours(this.user).subscribe();
-}
+  test(vision: string){
+    if(vision === 'findAll'){
+    return true;
+    }else{
+      return false;
+    }
+  }
 }

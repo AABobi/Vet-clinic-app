@@ -36,5 +36,6 @@ export class AuthenticationService implements OnInit {
   // tslint:disable-next-line: typedef
    logOut() {
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('function');
   }
 }
